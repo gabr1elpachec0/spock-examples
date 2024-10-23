@@ -1,6 +1,8 @@
 package org.example.math
 
 import groovy.transform.Canonical
+import org.example.math.exception.DivisionNumberException
+import org.example.math.exception.NegativeNumberException
 
 @Canonical
 class Calculator {
@@ -9,6 +11,9 @@ class Calculator {
     }
 
     int subtract(int a, int b) {
+        if (b > a) {
+            throw new NegativeNumberException("O segundo número é maior que o primeiro")
+        }
         return a - b
     }
 
@@ -17,6 +22,17 @@ class Calculator {
     }
 
     int divide(int a, int b) {
+        if (a % b != 0) {
+            throw new DivisionNumberException("Divisão com resto diferente de zero");
+        }
         return a / b
+    }
+
+    int getMaxValue(int a, int b) {
+        if (a > b) {
+            return a
+        } else {
+            return b
+        }
     }
 }
